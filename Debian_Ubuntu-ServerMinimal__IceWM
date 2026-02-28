@@ -1,12 +1,12 @@
 ##  Versão Ubuntu Server + IceWM (Lite)
 
-###  Interface Gráfica Minimalista
+##  Interface Gráfica Minimalista
 - `icewm`
 - `feh` (papel de parede)
 - `pasystray`, `pavucontrol` (áudio)
 - `gsimplecal`, `xfce4-notifyd`, `gcalculator`, `evince`
 
-###  Ferramentas de Desenvolvimento
+##  Ferramentas de Desenvolvimento
 - `python3-pip`
 - `openjdk-21-jdk`
 - `golang-go`
@@ -15,7 +15,7 @@
 - `git`, `make`, `cmake`
 - `vim`, `neovim`, `geany`
 
-###  DevOps e Infraestrutura
+##  DevOps e Infraestrutura
 - `docker.io`
 - `podman`
 - `ansible`
@@ -23,11 +23,11 @@
 - `terraform`
 - `helm`
 
-###  Segurança
+##  Segurança
 - `ufw`, `fail2ban`, `auditd`
 - `clamav`, `apparmor`
 
-###  Produtividade e Sistema
+##  Produtividade e Sistema
 - `tmux`, `htop`, `neofetch`, `ranger`
 - `synaptic` (GUI para pacotes)
 - `keepassxc`, `joplin-desktop`
