@@ -1,13 +1,13 @@
 ---
 
-# 🐧 LinuxConfigs
+# LinuxConfigs
 
 A collection of **Linux configuration files, scripts, and study notes** for system administration, security hardening, and DevSecOps practices.  
 This repository includes examples for **Debian/Ubuntu servers**, **virtualization setups**, and **firewall rules** using **iptables/nftables**.
 
 ---
 
-## 🚀 Features
+##  Features
 - **Firewall configurations**:
   - `iptables` rules for secure networking.  
   - `nftables` examples for modern packet filtering.  
@@ -82,6 +82,6 @@ See the `LICENSE` file for details.
 
 ## Author
 Developed by **Gabriel Santana**  
-📧 Contact: GabrielSantana1996sp on GitHub (github.com in Bing) [(bing.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fwww.bing.com%2Fsearch%3Fq%3D%2522https%253A%252F%252Fgithub.com%252FGabrielSantana1996sp%2522")
+ Contact: GabrielSantana1996sp on GitHub (github.com in Bing) [(bing.com in Bing)](https://www.bing.com/search?q="https%3A%2F%2Fwww.bing.com%2Fsearch%3Fq%3D%2522https%253A%252F%252Fgithub.com%252FGabrielSantana1996sp%2522")
 
 ---
