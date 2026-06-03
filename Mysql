@@ -1,0 +1,39 @@
+mysql --version
+sudo apt update
+sudo apt install mysql-server
+sudo systemctl start mysql
+sudo systemctl enable mysql
+sudo systemctl status mysql
+sudo mysql
+mysql -u root -p
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'passworld';
+GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+mysql -u user -p
+allowPublicKeyRetrieval = true
+sudo mysql
+SELECT user, host FROM mysql.user WHERE user = 'user';
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'passworld';
+GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+ALTER USER 'user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'passworld';
+FLUSH PRIVILEGES;
+mysql -u root -p
+sudo systemctl stop mysql
+sudo mysqld_safe --skip-grant-tables &
+mysql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'NewPassWorld';
+FLUSH PRIVILEGES;
+EXIT;
+sudo systemctl restart mysql
+mysql -u root -p
+sudo systemctl status mysql
+sudo systemctl start mysql
+sudo systemctl status mysql
+sudo journalctl -xe
+sudo tail -n 50 /var/log/mysql/error.log
+ls -l /var/run/mysqld/
+sudo mkdir -p /var/run/mysqld
+sudo chown mysql:mysql /var/run/mysqld
+sudo systemctl restart mysql
+mysql -u root -p
