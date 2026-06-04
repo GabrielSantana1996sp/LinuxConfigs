@@ -38,3 +38,15 @@ sudo update-alternatives --config pip3
 pip3 --version
 pip 26.1.1 from /usr/local/lib/python3.14/site-packages/pip (python 3.14)
 
+##Python Debian Base
+ apt policy python3
+python3:
+  Instalado: 3.13.5-1
+  Candidato: 3.13.5-1
+  Tabela de versão:
+ *** 3.13.5-1 500
+        500 http://deb.debian.org/debian trixie/main amd64 Packages
+        100 /var/lib/dpkg/status
+##voltar para Python base Debian
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.13 1
+
