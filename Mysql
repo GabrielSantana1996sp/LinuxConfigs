@@ -1,3 +1,14 @@
+cd ~/Downloads
+tar -xvf mysql-server_9.7.0-1debian13_amd64.deb-bundle.tar
+sudo apt install psmisc libmecab2 libjson-perl mecab-ipadic-utf8
+sudo dpkg -i *.deb
+sudo apt-get -f install
+sudo systemctl start mysql
+sudo systemctl enable mysql
+sudo mysql_secure_installation
+mysql -u root -p
+
+
 mysql --version
 sudo apt update
 sudo apt install mysql-server
