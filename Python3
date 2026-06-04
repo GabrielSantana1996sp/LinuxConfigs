@@ -2,16 +2,39 @@
 cd ~/Downloads
 tar -xf Python-3.14.5.tar.xz
 cd Python-3.14.5
+
 #Compilação e instalação
 ./configure --enable-optimizations
 make -j$(nproc)
 sudo make altinstall
+
 #trocar como padrão
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/local/bin/python3.14 2
 sudo update-alternatives --config python3
+
 #Testar o pip junto com o novo Python
 python3 -m pip --version
+
 #Criar um ambiente virtual para instalar pacotes sem risco de conflito:
 python3 -m venv ~/venvs/projeto1
 source ~/venvs/projeto1/bin/activate
 Instalar pacotes essenciais como setuptools, wheel e virtualenv para deixar o ambiente pronto.
+
+#registrar pip
+which pip3
+
+##se nnão tiver
+python3 -m pip --version
+ls /usr/local/bin | grep pip
+pip3.14 ##esse precisa ser o retorno
+
+##Registre o binário do pip3.14:
+sudo update-alternatives --install /usr/bin/pip3 pip3 /usr/local/bin/pip3.14 2
+
+##Agora escolha a versão padrão:
+sudo update-alternatives --config pip3
+
+##Vai aparecer a lista (nesse caso só o pip3.14), e você confirma.
+pip3 --version
+pip 26.1.1 from /usr/local/lib/python3.14/site-packages/pip (python 3.14)
+
