@@ -8,7 +8,6 @@ sudo systemctl enable mysql
 sudo mysql_secure_installation
 mysql -u root -p
 
-
 mysql --version
 sudo apt update
 sudo apt install mysql-server
