@@ -49,4 +49,6 @@ python3:
         100 /var/lib/dpkg/status
 ##voltar para Python base Debian
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.13 1
+##configurar p python base 
+sudo update-alternatives --config python3
 
