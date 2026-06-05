@@ -60,11 +60,50 @@ sudo apt install openjdk-21-jdk
 
 sudo update-alternatives --config java
 
+sudo nano /usr/local/bin/mongot
+
+run_mongot() {
+    exec "${JAVA_HOME}/bin/java" \
+    -XX:+ExitOnOutOfMemoryError \
+    -Djava.security.egd=file:/dev/urandom \
+    --add-modules=jdk.incubator.vector \
+    --enable-preview \
+    --enable-native-access=ALL-UNNAMED \
+    ${JVM_FLAGS} \
+    -cp "/usr/local/mongot-community/lib/*:/usr/local/mongot-community/bin/mongot_community_deploy.jar" \
+    com.xgen.mongot.community.MongotCommunity \
+    "${PASS_THROUGH_ARGS[@]:-}"
+}
+
+
 mongot --config /usr/local/mongot-community/config.default.yml
 
+sudo mkdir -p /var/lib/mongot
+sudo chown $(whoami):$(whoami) /var/lib/mongot
+
+/usr/local/mongot-community/config.default.yml
+
+mongosh
+
+use admin
+db.createUser({
+  user: "mongotUser",
+  pwd: "senhaSeguraAqui",
+  roles: [ { role: "searchCoordinator", db: "admin" } ]
+})
+
+use admin
+db.auth("admin", "senhaAdminAqui")
 
 
+sudo mkdir -p /etc/mongot/secrets
+echo "senhaSeguraAqui" | sudo tee /etc/mongot/secrets/passwordFile > /dev/null
+sudo chmod 600 /etc/mongot/secrets/passwordFile
 
+sudo cat /etc/mongot/secrets/passwordFile
+sudo chmod 644 /etc/mongot/secrets/passwordFile
+sudo chown $(whoami):$(whoami) /etc/mongot/secrets/passwordFile
+sudo chmod 600 /etc/mongot/secrets/passwordFile
 
 
 
