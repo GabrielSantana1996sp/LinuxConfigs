@@ -105,5 +105,11 @@ sudo chmod 644 /etc/mongot/secrets/passwordFile
 sudo chown $(whoami):$(whoami) /etc/mongot/secrets/passwordFile
 sudo chmod 600 /etc/mongot/secrets/passwordFile
 
+use admin
+db.createUser({
+  user: "mongotUser",
+  pwd: "senhaAdminAqui",
+  roles: [ { role: "searchCoordinator", db: "admin" } ]
+})
 
 
