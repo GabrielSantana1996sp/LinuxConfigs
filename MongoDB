@@ -9,6 +9,10 @@ ls
 sudo cp -r ~/Downloads/mongot-community /usr/local/
 sudo ln -s /usr/local/mongot-community/mongot /usr/local/bin/mongot
 
+wget https://downloads.mongodb.com/compass/mongodb-compass_1.42.5_amd64.deb
+sudo apt install ./mongodb-compass_1.42.5_amd64.deb
+
+
 nano ~/.local/share/applications/mongodb-compass.desktop
 
 [Desktop Entry]
@@ -21,3 +25,5 @@ Type=Application
 Categories=Development;Database;
 
 xfce4-panel --restart
+
+sudo systemctl start mongod
