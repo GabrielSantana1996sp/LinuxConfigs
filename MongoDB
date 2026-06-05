@@ -17,6 +17,11 @@ Categories=Development;Database;
 
 xfce4-panel --restart
 
+sudo mkdir -p /data/db
+sudo chown -R $(whoami) /data/db
+
+sudo systemctl status mongod
+
 sudo systemctl start mongod
 
 cd ~/Downloads
@@ -26,3 +31,17 @@ cd ~/Downloads/mongot-community
 ls
 sudo cp -r ~/Downloads/mongot-community /usr/local/
 sudo ln -s /usr/local/mongot-community/mongot /usr/local/bin/mongot
+
+/etc/mongod.conf
+
+search:
+  enabled: true
+  path: /usr/local/mongot-community/mongot
+
+javascript
+use admin
+db.createUser({
+  user: "admin",
+  pwd: "senhaSegura",
+  roles: [ { role: "root", db: "admin" } ]
+})
