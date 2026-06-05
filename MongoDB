@@ -45,3 +45,26 @@ db.createUser({
   pwd: "senhaSegura",
   roles: [ { role: "root", db: "admin" } ]
 })
+
+sudo nano /usr/local/bin/mongot
+
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if [[ $OSTYPE == "darwin"* ]]; then
+  export JAVA_HOME="${DIR}/bin/jdk/Contents/Home"
+else
+  export JAVA_HOME="/usr"
+fi
+
+sudo apt update
+sudo apt install openjdk-21-jdk
+
+sudo update-alternatives --config java
+
+mongot --config /usr/local/mongot-community/config.default.yml
+
+
+
+
+
+
+
