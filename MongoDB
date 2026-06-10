@@ -1,7 +1,6 @@
 # 1 Instalar MongoDB Compass
----
-```
-bash
+
+## bash
 wget https://downloads.mongodb.com/compass/mongodb-compass_1.42.5_amd64.deb
 sudo apt install ./mongodb-compass_1.42.5_amd64.deb
 
@@ -9,7 +8,7 @@ sudo apt install ./mongodb-compass_1.42.5_amd64.deb
 
 # ini
 # ~/.local/share/applications/mongodb-compass.desktop
-```
+
 [Desktop Entry]
 Name=MongoDB Compass
 Comment=GUI for MongoDB
@@ -21,14 +20,11 @@ Categories=Development;Database;
 
 # Reiniciar painel XFCE:
 
-```
-bash
+#bash
 xfce4-panel --restart
 ---
 ###2 Instalar MongoDB Community Server 8.0
----
-```
-bash
+#bash
 sudo apt update
 sudo apt install -y gnupg curl
 
@@ -38,53 +34,42 @@ curl -fsSL https://pgp.mongodb.com/server-8.0.asc | \
 echo "deb [signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg] \
 https://repo.mongodb.org/apt/debian bookworm/mongodb-org/8.0 main" | \
   sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
-
-```
-bash
+#bash
 sudo apt update
 sudo apt install -y mongodb-org
 
 sudo systemctl start mongod
 sudo systemctl enable mongod
 sudo systemctl status mongod
----
+
 ###Criar diretório de dados alternativo se necessário:
----
-```
-bash
+#bash
 sudo mkdir -p /data/db
 sudo chown -R $(whoami) /data/db
-###3 Instalar Mongot
 
-```
-bash
+###3 Instalar Mongot
+#bash
 cd ~/Downloads
 tar -xvf mongot_community_0.65.1_linux_x86_64.tgz
 sudo cp -r mongot-community-0.65.1-linux-x86_64 /usr/local/mongot-community
 sudo ln -s /usr/local/mongot-community/mongot /usr/local/bin/mongot
----
+
 ### Criar diretório de dados do mongot:
----
-```
-bash
+
+#bash
 sudo mkdir -p /var/lib/mongot
 sudo chown $(whoami):$(whoami) /var/lib/mongot
-Executar com config:
+##Executar com config:
 
-```
-bash
+##bash
 mongot --config /usr/local/mongot-community/config.default.yml
-4 Instalar Java para Mongot
-
-```
-bash
+##4 Instalar Java para Mongot
+##bash
 sudo apt update
 sudo apt install -y openjdk-21-jdk
 sudo update-alternatives --config java
 Wrapper sugerido /usr/local/bin/mongot:
-
-```
-bash
+#bash
 #!/usr/bin/env bash
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [[ $OSTYPE == "darwin"* ]]; then
@@ -108,12 +93,10 @@ run_mongot() {
 
 run_mongot "$@"
 Tornar executável:
-
-```
-bash
+##bash
 sudo chmod +x /usr/local/bin/mongot
-Configurações essenciais
-Exemplo de mongod.conf
+##Configurações essenciais
+##Exemplo de mongod.conf
 yaml
 storage:
   dbPath: /var/lib/mongodb
@@ -142,25 +125,23 @@ search:
   path: /usr/local/mongot-community/mongot
 Gerar keyFile para autenticação interna
 
-```
-bash
+##bash
 sudo mkdir -p /etc/mongodb
 sudo sh -c "openssl rand -base64 756 > /etc/mongodb/mongo-keyfile"
 sudo chmod 400 /etc/mongodb/mongo-keyfile
 sudo chown mongodb:mongodb /etc/mongodb/mongo-keyfile
-Segredos do Mongot
+##Segredos do Mongot
 
-```
-bash
+##bash
+
 sudo mkdir -p /etc/mongot/secrets
 echo "senhaSeguraAqui" | sudo tee /etc/mongot/secrets/passwordFile > /dev/null
 sudo chmod 600 /etc/mongot/secrets/passwordFile
 sudo chown $(whoami):$(whoami) /etc/mongot/secrets/passwordFile
----
+
 ### Criar usuários no mongosh
----
-```
-javascript
+
+##javascript
 use admin
 db.createUser({
   user: "admin",
@@ -176,15 +157,14 @@ db.createUser({
 })
 Autenticar:
 
-```
-javascript
+##javascript
 use admin
 db.auth("admin", "senhaAdminAqui")
 Systemd units sugeridas
 Unit mongod.service
----
+
 ###ini
----
+
 # /etc/systemd/system/mongod.service
 [Unit]
 Description=MongoDB Database Server
@@ -197,9 +177,9 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 Unit mongot.service
----
+
 ###ini
----
+
 # /etc/systemd/system/mongot.service
 [Unit]
 Description=Mongot Search Service
@@ -212,15 +192,10 @@ Restart=on-failure
 Environment=JAVA_HOME=/usr
 [Install]
 WantedBy=multi-user.target
-Ativar e iniciar:
 
-```
-bash
+#Ativar e iniciar:
+#bash
 sudo systemctl daemon-reload
 sudo systemctl enable mongot
 sudo systemctl start mongot
 sudo systemctl status mongot
----
-
-
-
