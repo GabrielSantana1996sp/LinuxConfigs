@@ -1,0 +1,61 @@
+README — Linux CPU Performance Mode
+
+Objetivo
+Configurar o governor da CPU para performance no Debian, garantindo que o processador rode sempre no clock máximo (2.30 GHz no i3-7020U).
+
+Instalação
+bash
+# Instalar o pacote cpupower
+sudo apt install linux-cpupower
+
+Configuração manual
+bash
+# Definir governor para performance
+sudo cpupower frequency-set -g performance
+
+# Alternativa via sysfs
+echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+Verificação
+bash
+# Informações da CPU
+cpupower frequency-info
+
+# Confirmar governor ativo
+cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+
+# Monitorar MHz em tempo real
+watch -n 1 "grep 'cpu MHz' /proc/cpuinfo"
+
+Configuração permanente
+Criar serviço systemd para aplicar no boot:
+
+bash
+sudo nano /etc/systemd/system/cpufreq.service
+Conteúdo:
+
+Código
+[Unit]
+Description=Set CPU governor to performance
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'echo performance | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+
+[Install]
+WantedBy=multi-user.target
+Ativar serviço:
+
+bash
+sudo systemctl enable cpufreq.service
+
+Teste de carga
+bash
+# Rodar stress test por 60 segundos
+stress-ng --cpu 4 --timeout 60s --metrics --log-file stress.log
+
+Resultado esperado
+Núcleos rodando próximos de 2300 MHz sob carga.
+
+Notebook mais responsivo para programação, labs e multitarefa.
